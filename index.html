@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <style>
+        form .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="myform">
+        <label>Password:</label>
+        <input type="password" name="pass"><br>
+        <label>Phone Number:</label>
+        <input type="text" name="mbl"><br>
+        <label>Email:</label>
+        <input type="email" name="mail"><br>
+        <input type="submit" value="Register">
+    </form>
+    <script>
+        $(document).ready(function(){
+            $('#myform').validate({
+                rules:{
+                    pass:{
+                        required:true,
+                        pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#])[A-Za-z\d@$#]{7,15}$/,
+                    },
+                    mbl:{
+                        required:true,
+                        pattern:/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/,
+                    },
+                    mail:{
+                        required:true,
+                        email:true,
+                        pattern:/^([a-zA-Z0-9_])+@cgvak.com$/,
+                    },
+                },
+                messages:{
+                    pass:{
+                        required:"Enter your password",
+                        pattern:"Enter the valid password",
+                    },
+                    mbl:{
+                        required:"Enter your Phone number",
+                        pattern:"Enter the valid number",
+                    },
+                    mail:{
+                        required:"enter your email",
+                        email:"enter valid email",
+                    },
+                },
+            });
+        });
+    </script>
+</body>
+</html>
